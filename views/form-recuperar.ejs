@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recuperar contraseña | El sabor de Rosita</title>
+  <link rel="icon" type="image/x-icon" href="/assets/logofondoblanco.png">
+  
+  <!-- CSS de Vite (manifest) -->
+  <% if (stylesCss) { %>
+    <link rel="stylesheet" href="/<%= stylesCss %>">
+  <% } %>
+
+  <!-- CSS externo -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body class="body-ingresar">
+
+  <!-- Formulario de recuperación de contraseña -->
+  <div class="d-flex justify-content-center align-items-center min-vh-100">
+    <form id="form-recuperar" class="bg-white p-4 rounded shadow mx-auto"
+          style="width:75vw;max-width:400px; background-color:rgb(var(--rosita-blanco))!important; padding:4rem;">
+      <h4 class="mb-3" style="color:var(--rosita-blanco)">Recuperar contraseña</h4>
+      <div class="mb-3">
+        <label for="recoverEmail" class="form-label letter-gold">Correo electrónico</label>
+        <input type="email" class="form-control" id="recoverEmail" required>
+      </div>
+      <button id="btn-recuperar" type="submit" class="btn btn-warning w-100">Recuperar</button>
+    </form>
+  </div>
+
+  <!-- Scripts externos -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  
+  <!-- JS de Vite (manifest) -->
+  <% if (mainJs) { %>
+    <script type="module" src="/<%= mainJs %>"></script>
+  <% } %>
+</body>
+</html>

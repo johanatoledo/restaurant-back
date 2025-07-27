@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>El sabor de Rosita | Fusion</title>
+  <link rel="icon" type="image/x-icon" href="/assets/logofondoblanco.png">
+
+  <!-- CSS de Vite dinámico (manifest) -->
+  <% if (stylesCss) { %>
+    <link rel="stylesheet" href="/<%= stylesCss %>">
+  <% } %>
+
+  <!-- Otros CSS externos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body>
+  
+<header id="mainNav" class="menu-nav" style="background-color:var(--rosita-verde) !important;">
+  <img src="/assets/logosaborosita.png" class="logo" alt="Logo El sabor de Rosita">
+  <div class="menu-horizontal">
+    <ul class="nav justify-content-end">
+      <li class="nav-item ">
+        <a class="nav-link" aria-current="page" href="http://localhost:3000/">Inicio</a>
+      </li>
+    </ul>
+  </div>
+  <div class="redes-sociales d-flex gap-3">
+    <a href="https://facebook.com" target="_blank" class="social-icon">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="https://instagram.com" target="_blank" class="social-icon">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://wa.me/1234567890" target="_blank" class="social-icon">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+  </div>
+</header>
+
+<main>
+  <section id="contenedor-menu-dinamico" class="container my-3">
+    <h2 class="text-center mb-4">Nuestro Menú</h2>
+    <div class="row justify-content-center g-3" id="menu-grid">
+      <!-- Aquí va el contenido dinámico del menú -->
+    </div>
+  </section>
+</main>
+
+<footer style="background-color: var(--rosita-verde);" class="text-light mt-5 pt-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-6 mb-4 mb-md-0">
+        <h5 class="mb-3 fw-bold" style="color: var(--rosita-dorado);">Servicio al cliente</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2">
+            <a href="#" style="color: var(--rosita-dorado);" class="text-decoration-none">Política de privacidad</a>
+          </li>
+          <li class="mb-2">
+            <a href="#" style="color: var(--rosita-dorado);" class="text-decoration-none">Términos y condiciones</a>
+          </li>
+          <li>
+            <a href="#" style="color: var(--rosita-dorado);" class="text-decoration-none">Libro de reclamaciones</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-12 col-md-6 d-flex align-items-center justify-content-md-end justify-content-center">
+        <img src="/assets/logosaborosita.png" class="logo" alt="Logo El sabor de Rosita">
+      </div>
+    </div>
+    <div class="border-top mt-4 pt-3 text-center" style="color: var(--rosita-dorado);">
+      <ul class="list-unstyled mb-2">
+        <li>Dirección</li>
+        <li>+51 234 768 923</li>
+        <li>Miércoles a Domingos 13:00pm - 1:00am</li>
+      </ul>
+      © 2025 El sabor de Rosita
+    </div>
+  </div>
+</footer>
+
+<!-- JS externos -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<!-- JS de Vite dinámico (manifest) -->
+<% if (mainJs) { %>
+  <script type="module" src="/<%= mainJs %>"></script>
+<% } %>
+</body>
+</html>

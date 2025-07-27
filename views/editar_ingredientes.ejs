@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>El sabor de Rosita | Fusion</title>
+  <link rel="icon" type="image/x-icon" href="/assets/logosaborosita.png">
+  
+  <!-- Estilos dinámicos de Vite (manifest) -->
+  <% if (stylesCss) { %>
+    <link rel="stylesheet" href="/<%= stylesCss %>">
+  <% } %>
+
+  <!-- Otros estilos externos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <header style="background-color:var(--rosita-verde) !important;">
+    <div class="menu-nav d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
+      <div>
+        <img src="/assets/logosaborosita.png" class="logo" alt="Logo El sabor de Rosita">
+      </div>
+      <div class="menu-horizontal mt-2 mt-md-0">
+        <ul class="nav justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="http://localhost:3000/ingresarUsuario">Salir</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main id="container-cards" class="container mt-5">
+    <!-- Contenedor que muestra opciones para agregar platos o bebidas -->
+    <div id="form-ingreso-datos" class="container mt-5" style="display:block;">
+      <div class="row justify-content-center g-4">
+        <div id="titulo-bienvenida-dinamico"></div>
+        
+        <div class="col-md-4">
+          <div class="card h-100 shadow">
+            <img src="/assets/vista-superior-diferentes-condimentos-verduras-frescas-oscuridad_140725-103981.jpg" class="card-img-top img-fluid" alt="Ingredientes">
+            <div class="card-body text-center">
+              <h5 class="card-title">Ingredientes</h5>
+              <a id="btn-agregar-ingrediente" class="btn btn-primary btns">Agregar</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card h-100 shadow">
+            <img src="/assets/gourmet-dish-focus-featuring-grilled-600nw-2554627539.webp" class="card-img-top img-fluid" alt="Platos">
+            <div class="card-body text-center">
+              <h5 class="card-title">Platos</h5>
+              <a id="btn-agregar-plato" class="btn btn-primary btns">Agregar</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card h-100 shadow">
+            <img src="/assets/images.jpeg" class="card-img-top img-fluid" alt="Bebidas">
+            <div class="card-body text-center">
+              <h5 class="card-title">Bebidas</h5>
+              <a id="btn-agregar-bebida" class="btn btn-primary btns">Agregar</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts personalizados -->
+  <script>
+    const formTarjetas = document.getElementById("form-ingreso-datos");
+    const titulo = document.getElementById("titulo-bienvenida-dinamico");
+    
+    // Recuperacion del usuario logeado
+    const user = JSON.parse(localStorage.getItem("usuarioLogueado")) || {};
+    const nombreUsuario = user.nombre?.toUpperCase() || "Usuario";
+
+    // Título de bienvenida sera el usuario logeado
+    const usuario = document.createElement("h1");
+    usuario.id = "usuario";
+    usuario.className = "text-center mb-4";
+    usuario.style.fontWeight = "bolder";
+    usuario.style.color = "var(--rosita-verde)";
+    usuario.textContent = "BIENVENIDO \n" + nombreUsuario;
+    usuario.style.padding = "0.5rem";
+    usuario.style.fontFamily = "'Segoe UI', sans-serif";
+
+    // Título de bienvenida dinámico
+    const tituloBien = document.createElement('div');
+    tituloBien.className = "espacing";
+    tituloBien.appendChild(usuario);
+    titulo.appendChild(tituloBien);
+  </script>
+
+  <!-- Scripts externos -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  
+  <!-- JS de Vite (manifest) -->
+  <% if (mainJs) { %>
+    <script type="module" src="/<%= mainJs %>"></script>
+  <% } %>
+</body>
+</html>

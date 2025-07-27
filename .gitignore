@@ -1,0 +1,24 @@
+node_modules/
+.env.development
+.env.production
+
+uploads/
+!uploads/1752009910975-beb_chicha.webp
+!uploads/1752010455454-jugo de guanabana.png
+!uploads/1752009210108-lemonade-6585073_1280.jpg
+!uploads/1752007972254-mojito.png
+!uploads/1752011386696-istockphoto-537641816-612x612.jpg
+!uploads/1752012420699-cosmopolita.png
+!uploads/1752013836195-pina colada.png
+!uploads/1752015091310-Margarita.png
+!uploads/1752023975328-caipiroska.png
+!uploads/1753145275336-Martini.
+!uploads/1752632541357-arroz con marisco.png
+!uploads/1752634443957-lomoSaltadoInicio.png
+!uploads/1752710658134-Arrozconpato.png
+!uploads/1752621627676-pabellonCriolloPlatos.png
+!uploads/1752630919617-platoCachapa.png
+!uploads/1752711705852-sopaVenezolana.png
+!uploads/1752633712292-ceviche.png
+!uploads/1752681484904-entradaCausa.png
+!uploads/1752635017426-tequenosVenezolanos.png
