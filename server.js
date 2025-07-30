@@ -9,11 +9,10 @@ import { fileURLToPath } from 'url';
 
 const app = express();
 
-
 // Middleware de seguridad (CORS, JSON)
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'http://localhost:5173', // Cambia esto por tu URL de frontend en producción
   credentials: true
 }));
 
@@ -35,19 +34,21 @@ app.use((req, res, next) => {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// === Ruta absoluta a la carpeta de build de Vite ===
+const distPath = path.join(__dirname, '..', 'front', 'dist'); // <- AGREGA ESTO
+
 // EJS config
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// __dirname, distPath...
-const distPath = path.join(__dirname, '..', 'front', 'dist');
+// === Carga el manifest de Vite para assets dinámicos (solo si existe) ===
 const manifestPath = path.join(distPath, '.vite', 'manifest.json');
-const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
-
-// **Sirve /dist como carpeta estática**
-app.use(express.static(distPath));
-
-
+let manifest = {};
+if (fs.existsSync(manifestPath)) {
+  manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+} else {
+  manifest = {}; // Evita errores si no existe, permite builds separados
+}
 
 // Sirve /uploads
 app.use('/uploads', express.static('uploads'));
@@ -64,11 +65,9 @@ app.get('/:page', (req, res, next) => {
   res.sendFile(filePath, err => { if (err) next(); });
 });
 
-
 // 404 fallback (opcional)
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(distPath, '404.html')); // Si tienes una página 404.html
-  // O simplemente: res.status(404).send('Página no encontrada');
+  res.status(404).sendFile(path.join(distPath, '404.html'));
 });
 
 const PORT = process.env.PORT || 3000;
