@@ -12,7 +12,7 @@ const app = express();
 // Middleware de seguridad (CORS, JSON)
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:5173', // Cambia esto por tu URL de frontend en producción
+  origin: 'http://restaurant-front-ten.vercel.app', // Cambia esto por tu URL de frontend en producción
   credentials: true
 }));
 
