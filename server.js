@@ -60,10 +60,12 @@ app.use('/menu', menuRoutes(manifest));
 
 // Rutas estáticas Vite
 app.get('/', (req, res) => res.sendFile(path.join(distPath, 'index.html')));
+app.get('/ingresarUsuario', (req, res) => res.sendFile(path.join(distPath, 'ingresarUsuario.html')));
 app.get('/:page', (req, res, next) => {
   const filePath = path.join(distPath, `${req.params.page}.html`);
   res.sendFile(filePath, err => { if (err) next(); });
 });
+
 
 // 404 fallback (opcional)
 app.use((req, res) => {
