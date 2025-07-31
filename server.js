@@ -60,7 +60,7 @@ app.use('/menu', menuRoutes(manifest));
 
 // Rutas estáticas Vite
 app.get('/', (req, res) => res.sendFile(path.join(distPath, 'index.html')));
-
+app.get('/menu', (req, res) => res.sendFile(path.join(distPath, 'menu.html')));
 app.get('/:page', (req, res, next) => {
   const filePath = path.join(distPath, `${req.params.page}.html`);
   res.sendFile(filePath, err => { if (err) next(); });
