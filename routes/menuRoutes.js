@@ -28,7 +28,7 @@ export default function(manifest) {
 
   // Página principal del menú (puede ser estática, generada por Vite)
   router.get('/', (req, res) => {
-    const formPath = path.join(distPath, 'menuInicio.html');
+    const formPath = path.join(distPath, 'menu.html');
     res.sendFile(formPath);
   });
 
