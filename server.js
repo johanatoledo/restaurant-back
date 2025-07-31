@@ -36,7 +36,7 @@ const __dirname = path.dirname(__filename);
 
 // === Ruta absoluta a la carpeta de build de Vite ===
 const distPath = path.join(__dirname, '..', 'front', 'dist'); 
-
+app.use(express.static(distPath));
 // EJS config
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -60,7 +60,7 @@ app.use('/menu', menuRoutes(manifest));
 
 // Rutas estáticas Vite
 app.get('/', (req, res) => res.sendFile(path.join(distPath, 'index.html')));
-app.get('/ingresarUsuario', (req, res) => res.sendFile(path.join(distPath, 'ingresarUsuario.html')));
+
 app.get('/:page', (req, res, next) => {
   const filePath = path.join(distPath, `${req.params.page}.html`);
   res.sendFile(filePath, err => { if (err) next(); });
