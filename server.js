@@ -12,7 +12,7 @@ const app = express();
 // Middleware de seguridad (CORS, JSON)
 app.use(express.json());
 app.use(cors({
-  origin: 'http://restaurant-front-ten.vercel.app', // Cambia esto por tu URL de frontend en producción
+  origin: 'http://restaurant-front-ten.vercel.app', 
   credentials: true
 }));
 
@@ -25,7 +25,7 @@ app.use((req, res, next) => {
     "img-src 'self' https: blob: data:; " +
     "media-src 'self' blob: data:; " +
     "font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; " +
-    "connect-src 'self' http://localhost:5500 http://localhost:3000;"
+    "connect-src 'self' https://restaurant-front-ten.vercel.app https://restaurant-back-production.up.railway.app;"
   );
   next();
 });
@@ -35,7 +35,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // === Ruta absoluta a la carpeta de build de Vite ===
-const distPath = path.join(__dirname, '..', 'front', 'dist'); // <- AGREGA ESTO
+const distPath = path.join(__dirname, '..', 'front', 'dist'); 
 
 // EJS config
 app.set('view engine', 'ejs');
