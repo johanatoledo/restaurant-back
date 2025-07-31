@@ -8,6 +8,7 @@
  * @param {Object} manifest - Objeto manifest generado por Vite tras el build.
  * @returns {Object} - Contiene mainJs y stylesCss con las rutas relativas a /dist.
  */
+
 export function getMainAssets(manifest) {
   // Busca la clave del primer chunk principal de JS (que contenga 'main' y termine en .js)
   const jsKey = Object.keys(manifest).find(key => key.endsWith('.js') && key.includes('main'));

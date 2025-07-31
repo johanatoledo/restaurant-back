@@ -27,6 +27,8 @@ export default function(manifest) {
   const __dirname = path.dirname(__filename);
   const distPath = path.join(__dirname, '..', '..', 'front', 'dist');
 
+  
+
   // Configuración de Multer para almacenamiento de imágenes en /uploads
   const storage = multer.diskStorage({
     destination: (req, file, cb) => cb(null, 'uploads/'),
