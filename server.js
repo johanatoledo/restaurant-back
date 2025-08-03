@@ -9,12 +9,23 @@ import { fileURLToPath } from 'url';
 
 const app = express();
 
-// Middleware de seguridad (CORS, JSON)
-app.use(express.json());
+const allowedOrigins = [
+  'https://restaurant-front-ten.vercel.app',
+  'https://restaurant-front-git-main-johana-toledos-projects.vercel.app',
+  'http://localhost:5173'
+];
+
 app.use(cors({
-  origin: 'http://restaurant-front-ten.vercel.app', 
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true
 }));
+
 
 // CSP 
 app.use((req, res, next) => {
