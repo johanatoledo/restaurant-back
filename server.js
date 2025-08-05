@@ -41,6 +41,9 @@ app.use((req, res, next) => {
   next();
 });
 
+// Middleware para parsear JSON
+app.use(express.json());
+
 // Paths necesarios para __dirname en ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -58,7 +61,7 @@ let manifest = {};
 if (fs.existsSync(manifestPath)) {
   manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
 } else {
-  manifest = {}; // Evita errores si no existe, permite builds separados
+  manifest = {}; 
 }
 
 // Sirve /uploads
@@ -78,7 +81,7 @@ app.get('/:page', (req, res, next) => {
 });
 
 
-// 404 fallback (opcional)
+
 app.use((req, res) => {
   res.status(404).sendFile(path.join(distPath, '404.html'));
 });

@@ -102,9 +102,12 @@
   <!-- Scripts externos -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   
-  <!-- JS de Vite (manifest) -->
+  <!-- carga segun el entorno -->
   <% if (mainJs) { %>
-    <script type="module" src="/<%= mainJs %>"></script>
-  <% } %>
+  <script type="module" src="/<%= mainJs %>"></script>
+<% } else { %>
+  <script type="module" src="/src/main.js"></script>
+<% } %>
+
 </body>
 </html>
