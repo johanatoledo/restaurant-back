@@ -8,6 +8,8 @@
  */
 
 import userService from '../models/User.js';
+const API_BASE = process.env.BACKEND_URL || 'http://localhost:3000';
+const API=`${API_BASE}/api`;
 
 /**
  * Registro de un nuevo usuario.
@@ -65,7 +67,7 @@ export async function recuperarUser(req, res) {
 
     // Generar token de recuperación
     const token = await userService.setResetToken(email);
-    const resetLink = `http://localhost:3000/ingresar/reset-password?token=${token}`;
+    const resetLink = `${API}/ingresar/reset-password?token=${token}`;
 
     // Enviar email real aquí (TODO: integrar con nodemailer o similar)
     console.log("Enlace de recuperación:", resetLink);

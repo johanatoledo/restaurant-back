@@ -9,7 +9,7 @@
 import axios from 'axios';
 
 // Usa variable de entorno para la URL base de la API interna (Railway y local)
-const API_BASE = process.env.INTERNAL_API_URL || 'http://localhost:3000';
+const API_BASE = process.env.BACKEND_URL || 'http://localhost:3000';
 
 /**
  * Filtra platos por categoría.
