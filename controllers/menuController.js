@@ -8,8 +8,8 @@
 
 import axios from 'axios';
 
-// Usa variable de entorno para la URL base de la API interna (Railway y local)
 const API_BASE = process.env.BACKEND_URL || 'http://localhost:3000';
+const API=`${API_BASE}/api`;
 
 /**
  * Filtra platos por categoría.
@@ -21,7 +21,7 @@ export async function platosPorCategoria(req, res) {
     const { categoria } = req.query;
 
     // Llama al endpoint interno para obtener todos los platos
-    const response = await axios.get(`${API_BASE}/admin/listaPlatos`);
+    const response = await axios.get(`${API}/admin/listaPlatos`);
     const platos = response.data;
 
     // Filtra por categoría
