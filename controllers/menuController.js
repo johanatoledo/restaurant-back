@@ -44,7 +44,7 @@ export async function bebidasPorTipo(req, res) {
     const { categoria } = req.query;
 
     // Llama al endpoint interno para obtener todas las bebidas
-    const response = await axios.get(`${API_BASE}/admin/listaBebidas`);
+    const response = await axios.get(`${API}/admin/listaBebidas`);
     const bebidas = response.data;
 
     // Filtra por categoría
