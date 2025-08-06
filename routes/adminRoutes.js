@@ -17,15 +17,15 @@ import {
 import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { getMainAssets } from '../utils/manifestAssets.js'; // Utilidad para cargar assets del manifest
 
-export default function(manifest) {
+
+export default function(frontendUrl,BACKEND_URL) {
   const router = express.Router();
 
   // Para compatibilidad ES Modules
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
-  const distPath = path.join(__dirname, '..', '..', 'front', 'dist');
+
 
   
 
@@ -36,32 +36,25 @@ export default function(manifest) {
   });
   const upload = multer({ storage });
 
-  /**
-   * Vistas administrativas (usan EJS y assets dinámicos de Vite)
-   */
+ 
   router.get('/editarMenu', (req, res) => {
-    const { mainJs, stylesCss } = getMainAssets(manifest);
-    res.render('editar_ingredientes', { mainJs, stylesCss });
+    res.render('editar_ingredientes', { frontendUrl });
   });
 
   router.get('/ingredientes', (req, res) => {
-    const { mainJs, stylesCss } = getMainAssets(manifest);
-    res.render('ingredientes', { mainJs, stylesCss });
+    res.render('ingredientes', { frontendUrl,BACKEND_URL });
   });
 
   router.get('/platos', (req, res) => {
-    const { mainJs, stylesCss } = getMainAssets(manifest);
-    res.render('platos', { mainJs, stylesCss });
+    res.render('platos', { frontendUrl });
   });
 
   router.get('/bebidas', (req, res) => {
-    const { mainJs, stylesCss } = getMainAssets(manifest);
-    res.render('bebidas', { mainJs, stylesCss });
+    res.render('bebidas', { frontendUrl , BACKEND_URL });
   });
 
   router.get('/login', (req, res) => {
-    const { mainJs, stylesCss } = getMainAssets(manifest);
-    res.render('login', { mainJs, stylesCss });
+    res.render('login', { frontendUrl });
   });
 
   /**

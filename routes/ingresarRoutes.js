@@ -13,9 +13,9 @@ import express from 'express';
 import { registerUser, recuperarUser, resetPassword } from '../controllers/ingresarControllers.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { getMainAssets } from '../utils/manifestAssets.js';
 
-export default function(manifest) {
+
+export default function(frontendUrl) {
   const router = express.Router();
 
   // Compatibilidad para __dirname en ES Modules
@@ -28,20 +28,17 @@ export default function(manifest) {
 
   // Renderiza formulario de registro
   router.get('/register', (req, res) => {
-    const { mainJs, stylesCss } = getMainAssets(manifest);
-    res.render('form-registro', { mainJs, stylesCss });
+    res.render('form-registro', { frontendUrl });
   });
 
   // Renderiza formulario de recuperación de contraseña
   router.get('/recuperar', (req, res) => {
-    const { mainJs, stylesCss } = getMainAssets(manifest);
-    res.render('form-recuperar', { mainJs, stylesCss });
+    res.render('form-recuperar', { frontendUrl });
   });
 
   // Renderiza formulario de reseteo de contraseña (por token)
   router.get('/reset-password', (req, res) => {
-    const { mainJs, stylesCss } = getMainAssets(manifest);
-    res.render('reset-password', { mainJs, stylesCss });
+    res.render('reset-password', { frontendUrl });
   });
 
   /**

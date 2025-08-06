@@ -10,38 +10,22 @@
 
 import express from 'express';
 import { platosPorCategoria, bebidasPorTipo } from '../controllers/menuController.js';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { getMainAssets } from '../utils/manifestAssets.js'; 
 
-export default function(manifest) {
+
+
+export default function(frontendUrl) {
   const router = express.Router();
 
-  // Compatibilidad para __dirname en ES Modules
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = path.dirname(__filename);
-  const distPath = path.join(__dirname, '..', '..', 'front', 'dist');
 
-  /**
-   * Vistas principales del menú (HTML estático de Vite o EJS para assets dinámicos)
-   */
-
-  // Página principal del menú (puede ser estática, generada por Vite)
-  router.get('/', (req, res) => {
-    const formPath = path.join(distPath, 'menu.html');
-    res.sendFile(formPath);
-  });
 
   // Renderiza menú de platos (usa EJS y assets procesados)
   router.get('/menuPlatos', (req, res) => {
-    const { mainJs, stylesCss } = getMainAssets(manifest);
-    res.render('menu', { mainJs, stylesCss });
+    res.render('menu', { frontendUrl });
   });
 
   // Renderiza menú de bebidas (usa EJS y assets procesados)
   router.get('/menuBebidas', (req, res) => {
-    const { mainJs, stylesCss } = getMainAssets(manifest);
-    res.render('menuBebidas', { mainJs, stylesCss });
+    res.render('menuBebidas', { frontendUrl });
   });
 
   /**

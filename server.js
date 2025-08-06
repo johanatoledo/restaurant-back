@@ -4,17 +4,18 @@ import ingresarRoutes from './routes/ingresarRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import menuRoutes from './routes/menuRoutes.js';
 import path from 'path';
-import fs from 'fs';
 import { fileURLToPath } from 'url';
 
 const app = express();
-
+const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:3000';
+const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173'; 
 const allowedOrigins = [
   'https://restaurant-front-ten.vercel.app',
   'https://restaurant-front-git-main-johana-toledos-projects.vercel.app',
   'http://localhost:5173'
 ];
 
+// Configura CORS solo para el frontend de Vercel y local
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin) return callback(null, true);
@@ -26,8 +27,7 @@ app.use(cors({
   credentials: true
 }));
 
-
-// CSP 
+// Seguridad básica CSP
 app.use((req, res, next) => {
   res.setHeader("Content-Security-Policy", 
     "default-src 'self'; " +
@@ -41,49 +41,36 @@ app.use((req, res, next) => {
   next();
 });
 
-// Middleware para parsear JSON
+// Middleware para JSON
 app.use(express.json());
 
-// Paths necesarios para __dirname en ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // === Ruta absoluta a la carpeta de build de Vite ===
-const distPath = path.join(__dirname, '..', 'front', 'dist'); 
+const distPath = path.join(__dirname, '..', 'front', 'dist');
 app.use(express.static(distPath));
-// EJS config
+
+
+//  EJS para admin interno (opcional)
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// === Carga el manifest de Vite para assets dinámicos (solo si existe) ===
-const manifestPath = path.join(distPath, '.vite', 'manifest.json');
-let manifest = {};
-if (fs.existsSync(manifestPath)) {
-  manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
-} else {
-  manifest = {}; 
-}
 
-// Sirve /uploads
 app.use('/uploads', express.static('uploads'));
 
-// Rutas de API (antes de las rutas de páginas)
-app.use('/ingresar', ingresarRoutes(manifest));
-app.use('/admin', adminRoutes(manifest));
-app.use('/menu', menuRoutes(manifest));
 
-// Rutas estáticas Vite
-app.get('/', (req, res) => res.sendFile(path.join(distPath, 'index.html')));
-app.get('/menu', (req, res) => res.sendFile(path.join(distPath, 'menu.html')));
-app.get('/:page', (req, res, next) => {
-  const filePath = path.join(distPath, `${req.params.page}.html`);
-  res.sendFile(filePath, err => { if (err) next(); });
-});
+// ---- Rutas solo API o panel interno ----
+
+// Rutas de API (prefix /api recomendado para claridad)
+app.use('/api/ingresar', ingresarRoutes(frontendUrl));
+app.use('/api/admin', adminRoutes(frontendUrl,BACKEND_URL));
+app.use('/api/menu', menuRoutes(frontendUrl));
 
 
-
+// Manejo de 404 API JSON
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(distPath, '404.html'));
+  res.status(404).json({ error: 'Ruta no encontrada' });
 });
 
 const PORT = process.env.PORT || 3000;
