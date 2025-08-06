@@ -15,7 +15,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 
-export default function(frontendUrl) {
+export default function(frontendUrl,BACKEND_URL) {
   const router = express.Router();
 
   // Compatibilidad para __dirname en ES Modules
@@ -38,7 +38,7 @@ export default function(frontendUrl) {
 
   // Renderiza formulario de reseteo de contraseña (por token)
   router.get('/reset-password', (req, res) => {
-    res.render('reset-password', { frontendUrl });
+    res.render('reset-password', { frontendUrl,BACKEND_URL });
   });
 
   /**

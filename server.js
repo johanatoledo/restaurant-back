@@ -29,11 +29,12 @@ app.use(cors({
 
 // Seguridad básica CSP
 app.use((req, res, next) => {
-  res.setHeader("Content-Security-Policy", 
+  const frontendUrl = 'https://restaurant-front-ten.vercel.app'; 
+  res.setHeader("Content-Security-Policy",
     "default-src 'self'; " +
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; " +
-    "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://translate.googleapis.com https://www.gstatic.com; " +
-    "img-src 'self' https: blob: data:; " +
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net " + frontendUrl + "; " + 
+    "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://translate.googleapis.com https://www.gstatic.com " + frontendUrl + "; " + 
+    "img-src 'self' https: blob: data: " + frontendUrl + "; " + 
     "media-src 'self' blob: data:; " +
     "font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; " +
     "connect-src 'self' https://restaurant-front-ten.vercel.app https://restaurant-back-production.up.railway.app;"
@@ -63,7 +64,7 @@ app.use('/uploads', express.static('uploads'));
 // ---- Rutas solo API o panel interno ----
 
 // Rutas de API (prefix /api recomendado para claridad)
-app.use('/api/ingresar', ingresarRoutes(frontendUrl));
+app.use('/api/ingresar', ingresarRoutes(frontendUrl,BACKEND_URL));
 app.use('/api/admin', adminRoutes(frontendUrl,BACKEND_URL));
 app.use('/api/menu', menuRoutes(frontendUrl));
 
