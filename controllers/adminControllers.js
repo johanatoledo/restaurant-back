@@ -14,6 +14,7 @@ import {
   obtenerTodosLosPlatos, eliminarPlatoPorId
 } from '../models/platoBebida.js';
 
+
 /**
  * Guarda un nuevo ingrediente en la base de datos.
  * Validaciones básicas antes de insertar.
