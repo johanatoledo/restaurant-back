@@ -8,7 +8,7 @@
  */
 
 import userService from '../models/User.js';
-const API_BASE = process.env.BACKEND_URL || 'http://localhost:3000';
+const API_BASE = 'restaurant-back.railway.internal' || 'http://localhost:3000';
 const API=`${API_BASE}/api`;
 
 /**
